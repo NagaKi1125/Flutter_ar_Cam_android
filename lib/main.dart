@@ -1,4 +1,3 @@
-import 'package:splashscreen/splashscreen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'Screen/camera.dart';

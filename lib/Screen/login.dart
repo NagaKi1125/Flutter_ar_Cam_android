@@ -57,9 +57,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _entryField(
-      String title, String hint, TextEditingController controller,
-      {bool isPassword = false}) {
+  Widget _entryField(String title, String hint, TextEditingController controller,{bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -85,26 +83,26 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xfffbb448), Color(0xfff7892b)])),
-      child: Text(
-        'Login',
-        style: TextStyle(fontSize: 20, color: Colors.white),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: SizedBox(
+        width: 300,
+        height: 50,
+        child: ElevatedButton(
+          onPressed: ()=>{
+            signIn(_emailController.text, _passwordController.text)
+          },
+          child: Text(
+            'Login',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.orangeAccent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30)
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -115,29 +113,21 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => SignUpPage()));
       },
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
-        padding: EdgeInsets.all(15),
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Don\'t have an account ?',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              'Register',
-              style: TextStyle(
-                  color: Color(0xfff79c4f),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
-            ),
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Don\'t have an account ?   ',
+            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          ),
+          Text(
+            'Register',
+            style: TextStyle(
+                color: Color(0xfff79c4f),
+                fontSize: 13,
+                fontWeight: FontWeight.w600),
+          ),
+        ],
       ),
     );
   }
@@ -165,38 +155,25 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Container(
-      height: height,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _title(),
-                  _emailPasswordWidget(),
-                  SizedBox(height: 20),
-                  InkWell(
-                    child: _submitButton(),
-                    onTap: () {
-                      signIn(_emailController.text, _passwordController.text);
-                    },
-                  ),
-                  SizedBox(height: height * .03),
-                  _createAccountLabel(),
-                ],
-              ),
-            ),
+      body: Center(
+        child: SingleChildScrollView(
+          reverse: true,
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Positioned(child: _backButton(), left: 0, top: 40,),
+              _title(),
+              _emailPasswordWidget(),
+              SizedBox(height: 20),
+              _submitButton(),
+              _createAccountLabel(),
+            ],
           ),
-          Positioned(top: 40, left: 0, child: _backButton()),
-        ],
-      ),
-    ));
+        ),
+      ));
   }
 
   signIn(String email, String password) async {

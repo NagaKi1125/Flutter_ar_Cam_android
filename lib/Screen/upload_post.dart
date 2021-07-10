@@ -142,7 +142,7 @@ class _UploadPostState extends State<UploadPost> {
     var response = await request.send();
     print(response.statusCode);
     if(response.statusCode == 200){
-
+      Navigator.of(this.context).popUntil((route) => route.isFirst);
     }
     response.stream.transform(utf8.decoder).listen((event) {
       print(event);

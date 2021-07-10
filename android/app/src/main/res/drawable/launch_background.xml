@@ -9,8 +9,5 @@
             android:gravity="center"
             android:src="@mipmap/ic_launcher" />
     </item> -->
-    <item>
-        <bitmap android:gravity="center" android:src="@drawable/splash" />
-    </item>
 
 </layer-list>

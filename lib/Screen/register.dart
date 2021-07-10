@@ -87,31 +87,25 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xfffbb448), Color(0xfff7892b)])),
-      child: InkWell(
-        child: Text(
-          'Register Now',
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-        onTap: () async {
-          _register();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: SizedBox(
+        width: 300,
+        height: 50,
+        child: ElevatedButton(
+          child: Text(
+            'Register Now',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.orangeAccent,
+            shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30)
+          ),
+        ), onPressed: () {
+            _register();
         },
+        ),
       ),
     );
   }
@@ -128,11 +122,8 @@ class _SignUpPageState extends State<SignUpPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Already have an account ?',
+              'Already have an account ?    ',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              width: 10,
             ),
             Text(
               'Login',
@@ -244,34 +235,25 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-        height: height,
-        child: Stack(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _title(),
-                    _emailPasswordWidget(),
-                    SizedBox(height: 20),
-                    Center(
-                      child: _submitButton(),
-                    ),
-                    SizedBox(height: height*.02),
-                    _loginAccountLabel(),
-                    SizedBox(height: height*.01),
-                  ],
-                ),
+      body: Center(
+        child: SingleChildScrollView(
+          reverse: true,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Positioned(top: 40, left: 0, child: _backButton()),
+              _title(),
+              _emailPasswordWidget(),
+              SizedBox(height: 20),
+              Center(
+                child: _submitButton(),
               ),
-            ),
-            Positioned(top: 40, left: 0, child: _backButton()),
-          ],
+              _loginAccountLabel(),
+            ],
+          ),
         ),
       ),
     );
